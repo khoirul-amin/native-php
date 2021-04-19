@@ -10,14 +10,16 @@
 
 
 <div class="container mt-4 mb-4">
-    <?php if($_GET['pesan'] == 'gagal'){ ?>
+    <?php
+    if(!empty($_GET['pesan'])){
+    if($_GET['pesan'] == 'gagal'){ ?>
     <div class="alert alert-danger alert-dismissible fade show" role="alert">
         <strong>Login Gagal !</strong> Cek kembali username atau password anda.
         <button type="button" class="close btn" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
     </div>
-    <?php } ?>
+    <?php } } ?>
     <div class="row justify-content-md-center pt-4 pb-4">
         <div class="col col-lg-8 p-0">
             <div class="row ml-0 mr-0 justify-content-center">
