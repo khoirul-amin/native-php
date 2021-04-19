@@ -16,7 +16,7 @@
         <div class="row ml-0 mr-0 pt-md-4">
             <div class="col-md-6 pt-md-4 pl-0"></div>
             <div class="col-md-6 pt-md-4 pl-0">
-                <img src="../assets/img/theme/konstruksi.png" width="400px" alt="">
+                <img src="./assets/img/theme/konstruksi.png" width="400px" alt="">
             </div>
         </div>
     </div>

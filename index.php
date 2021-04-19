@@ -11,7 +11,7 @@
       <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
         <div class="carousel-inner">
           <div class="carousel-item active">
-              <img src="../assets/img/theme/slide4.jpeg" width="100%" height="650px" alt="slide1">
+              <img src="./assets/img/theme/slide4.jpeg" width="100%" height="650px" alt="slide1">
               <div class="container">
                 <div class="carousel-caption-custom">
                   <span class="caption">Punya Masalah <br>Seputar Konstruksi?</span><br>
@@ -21,7 +21,7 @@
               </div>
           </div>
           <div class="carousel-item">
-            <img src="../assets/img/theme/slide2.jpeg" width="100%" height="650px" alt="slide2">
+            <img src="./assets/img/theme/slide2.jpeg" width="100%" height="650px" alt="slide2">
               <div class="container">
                 <div class="carousel-caption-custom">
                   <span class="caption">Punya Masalah <br>Seputar Konstruksi?</span><br>
@@ -31,7 +31,7 @@
               </div>
           </div>
           <div class="carousel-item">
-            <img src="../assets/img/theme/slide3.jpeg" width="100%" height="650px" alt="slide3">
+            <img src="./assets/img/theme/slide3.jpeg" width="100%" height="650px" alt="slide3">
               <div class="container">
                 <div class="carousel-caption-custom">
                   <span class="caption">Punya Masalah <br>Seputar Konstruksi?</span><br>
@@ -48,7 +48,7 @@
   <div class="container">
     <div class="row ml-0 mr-0 mb-4 align-items-end" style="margin-top:-50px;">
       <div class="col-lg-4 pl-0 rounded" style="height:280px;overflow:hidden;">
-        <img src="../assets/img/theme/slide5.jpeg" style="" height="300px" alt="">
+        <img src="./assets/img/theme/slide5.jpeg" style="" height="300px" alt="">
       </div>
       <div class="col-lg-8">
         <h2><b>Klinik Konstruksi</b></h2><br>
@@ -73,7 +73,7 @@
                 <div class="oval">4</div>
               </div>
               <div class="p-0 col-lg-4">
-                <img src="../assets/img/theme/image1.png" width="250px" alt="image-card">
+                <img src="./assets/img/theme/image1.png" width="250px" alt="image-card">
               </div>
           </div>
         </div>
@@ -88,7 +88,7 @@
                 <div class="oval">4</div>
               </div>
               <div class="p-0 col-lg-4">
-                <img src="../assets/img/theme/image1.png" width="250px" alt="image-card">
+                <img src="./assets/img/theme/image1.png" width="250px" alt="image-card">
               </div>
           </div>
         </div>
@@ -103,7 +103,7 @@
                 <div class="oval">4</div>
               </div>
               <div class="p-0 col-lg-4">
-                <img src="../assets/img/theme/image1.png" width="250px" alt="image-card">
+                <img src="./assets/img/theme/image1.png" width="250px" alt="image-card">
               </div>
           </div>
         </div>
@@ -118,7 +118,7 @@
                 <div class="oval on">4</div>
               </div>
               <div class="p-0 col-lg-4">
-                <img src="../assets/img/theme/image1.png" width="250px" alt="image-card">
+                <img src="./assets/img/theme/image1.png" width="250px" alt="image-card">
               </div>
           </div>
         </div>
@@ -132,21 +132,21 @@
       </div>
       <div class="col-lg-4 text-center">
         <div class="card-custom">
-          <img src="../assets/img/icons/Icon.svg" alt="icon1">
+          <img src="./assets/img/icons/Icon.svg" alt="icon1">
           <h5 class="mt-3"><b>Struktur</b></h5><br>
           <p>Lorem ipsum, atau ringkasnya lipsum, adalah teks standar yang ditempatkan untuk.</p>
         </div>
       </div>
       <div class="col-lg-4 text-center">
         <div class="card-custom card-custom-on">
-          <img src="../assets/img/icons/shovel.svg" alt="icon1">
+          <img src="./assets/img/icons/shovel.svg" alt="icon1">
           <h5 class="mt-3"><b>Beton</b></h5><br>
           <p>Lorem ipsum, atau ringkasnya lipsum, adalah teks standar yang ditempatkan untuk.</p>
         </div>
       </div>
       <div class="col-lg-4 text-center">
         <div class="card-custom">
-          <img src="../assets/img/icons/foundation.svg" alt="icon1">
+          <img src="./assets/img/icons/foundation.svg" alt="icon1">
           <h5 class="mt-3"><b>Pondasi & Tanah</b></h5><br>
           <p>Lorem ipsum, atau ringkasnya lipsum, adalah teks standar yang ditempatkan untuk.</p>
         </div>
@@ -166,7 +166,7 @@
       <div class="col-lg-4 text-center">
         <div class="card-custom">
           <h5 class="mt-3"><b><?=$tipe['judul']?></b></h5><br>
-          <img width="200px" class="mb-2" src="../assets/img/imageUpload/<?=$tipe['image']?>" alt="icon1">
+          <img width="200px" class="mb-2" src="./assets/img/imageUpload/<?=$tipe['image']?>" alt="icon1">
           <p><?=substr($tipe['isi'],0,100)?></p>
         </div>
       </div>
@@ -184,7 +184,7 @@
       while($portfolio = mysqli_fetch_array($result)){?>
       <div class="col-lg-4 pt-2 d-flex justify-content-center">
         <div class="card" style="width: 18rem;">
-          <img src="../assets/img/imageUpload/<?=$portfolio['image']?>" class="card-img-top" alt="...">
+          <img src="./assets/img/imageUpload/<?=$portfolio['image']?>" class="card-img-top" alt="...">
           <div class="card-body">
             <h5><b><?=$portfolio->judul?></b></h5>
             <p class="card-text"><?=substr($portfolio['isi'],0,100)?></p>

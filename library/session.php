@@ -3,7 +3,7 @@ class Session{
     function cek_session(){
 	    session_start();
         // cek apakah yang mengakses halaman ini sudah login
-        if($_SESSION['userLogin']==""){
+        if(empty($_SESSION['userLogin'])){
             return false;
         }else{
             return $_SESSION['userLogin'];

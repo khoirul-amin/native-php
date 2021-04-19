@@ -10,7 +10,9 @@
 
 
 <div class="container mt-4 mb-4">
-    <?php if($_GET['pesan'] == 'success'){ ?>
+    <?php
+    if(!empty($_GET['pesan'])){
+    if($_GET['pesan'] == 'success'){ ?>
     <div class="alert alert-success alert-dismissible fade show" role="alert">
         <strong>Register berhasil !</strong> Silahkan login elalui halaman login.
         <button type="button" class="close btn" data-dismiss="alert" aria-label="Close">
@@ -33,14 +35,16 @@
             <span aria-hidden="true">&times;</span>
         </button>
     </div>
-    <?php } ?>
+    <?php }
+    }
+    ?>
     <div class="row justify-content-md-center pt-4 pb-4">
         <div class="col col-lg-8 p-0">
             <div class="row ml-0 mr-0 justify-content-center">
                 <div class="col-md-4 d-none d-md-block text-center rounded-left" style="background:#001970;color:#9FA8DA;">
                     <p class="welcome mt-4">Welcome</p>
                     <span style="font-weight:bold;">Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum</span"><br>
-                    <img src="../assets/img/brand/Register.svg" class="mt-4" style="width:150px;" alt="login-image"/><br/>
+                    <img src="./assets/img/brand/Register.svg" class="mt-4" style="width:150px;" alt="login-image"/><br/>
 
                     <a href="./login.php" class="rounded-pill btn btn-warning text-white mt-4 mb-4">Sign In</a>
                 </div>

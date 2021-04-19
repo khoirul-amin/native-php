@@ -13,12 +13,12 @@
     <!-- Bootstrap CSS -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../assets/css/bootstrap/bootstrap.css" type="text/css">
-    <link rel="stylesheet" href="../assets/css/custom-landing.css" type="text/css">
-    <link rel="stylesheet" href="../assets/vendor/sweetalert2/dist/sweetalert2.min.css">
-    <link rel="icon" href="../assets/img/brand/favicon.png" type="image/png">
+    <link rel="stylesheet" href="./assets/css/bootstrap/bootstrap.css" type="text/css">
+    <link rel="stylesheet" href="./assets/css/custom-landing.css" type="text/css">
+    <link rel="stylesheet" href="./assets/vendor/sweetalert2/dist/sweetalert2.min.css">
+    <link rel="icon" href="./assets/img/brand/favicon.png" type="image/png">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
-    <link rel="stylesheet" href="../assets/vendor/@fortawesome/fontawesome-free/css/all.min.css" type="text/css">
+    <link rel="stylesheet" href="./assets/vendor/@fortawesome/fontawesome-free/css/all.min.css" type="text/css">
   <style type="text/css">
         html, body {
             height: 100%;
@@ -69,7 +69,7 @@
     </div>
 </body>
 
-<script src="../assets/vendor/jquery/dist/jquery.min.js"></script>
-<script src="../assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-<script src="../assets/vendor/sweetalert2/dist/sweetalert2.min.js"></script>
+<script src="./assets/vendor/jquery/dist/jquery.min.js"></script>
+<script src="./assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="./assets/vendor/sweetalert2/dist/sweetalert2.min.js"></script>
 </html>
