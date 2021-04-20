@@ -89,7 +89,13 @@
                 <div class="col">
                   <h5 class="card-title text-uppercase text-muted mb-2">Total Kunjungan Hari Ini</h5>
                   <span class="h2 font-weight-bold mb-0">
-                  50
+                  <?php
+                    $jsonString = file_get_contents('../assets/kunjungan.json');
+                    $data = json_decode($jsonString, true);
+                    if(!empty($data)){
+                      echo $data['total_kunjungan'];
+                    }
+                  ?>
                   </span>
                 </div>
                 <div class="col-auto">

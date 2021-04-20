@@ -39,7 +39,7 @@
           data-toggle='modal' data-target='#modalForm'>
             <i class="fas fa-plus"></i> Tambah
           </button>
-          <a href="../function/cetak.php?id=<?=$id;?>" target="new" class="btn btn-danger mb-2 btn-sm">
+          <a href="../function/cetak.php?id=<?=$_GET['id'];?>" target="new" class="btn btn-danger mb-2 btn-sm">
             <i class="fas fa-plus"></i> Print
           </a>
         <div class="card p-2">
@@ -71,6 +71,26 @@
                     $table = "<table class='table'>$col</table>";
                     $title[] = "<h4 class='text-center'>$nama_kategori</h4>".$table; 
                 }
+                $rab1s =  mysqli_query($koneksi,"SELECT * FROM detail_konstruksi WHERE id_kategori=0 AND id_pemesanan='$id'");
+                $collain = "";
+                while($rab1 = mysqli_fetch_array($rab1s)){
+                    $rab_id = $rab1['id'];
+                    $keterangan = $rab1['keterangan'];
+                    $satuan = $rab1['satuan'];
+                    $harga_satuan = $rab1['harga_satuan'];
+                    $volume = $rab1['volume'];
+                    $total = $rab1['total'];
+                    $collain = $collain."<tr>
+                        <td class='mr-auto'>$keterangan</td>
+                        <td class='mr-2'>$satuan</td>
+                        <td class='mr-2'>Rp. ".number_format($harga_satuan)."</td>
+                        <td class='mr-2'>$volume</td>
+                        <td class='mr-2'>Rp. ".number_format($total)."</td>
+                        <td class='mr-2'><a href='../function/hapus_rab.php?id=$rab_id&id_pem=$id' class='btn btn-primary btn-sm text-white' >Hapus</a></td>
+                    </tr>"; 
+                }
+                $tblain = "<table class='table'>$collain</table>";
+                $title[] = "<h4 class='text-center'>PEKERJAAN LAIN-LAIN</h4>".$tblain; 
                 for($i=0; $i<count($title);$i++){
                     echo $title[$i];
                 }; 
@@ -80,8 +100,8 @@
             <div class="row ml-0 mr-0">
                 <div class="mr-auto">Jumlah</div>
                 <?php
-                    $total = mysqli_query($koneksi,"SELECT SUM(total) AS total FROM detail_konstruksi WHERE id_pemesanan='$id'");
-                    while($total = mysqli_fetch_assoc($total)){
+                    $totals = mysqli_query($koneksi,"SELECT SUM(total) AS total FROM detail_konstruksi WHERE id_pemesanan='$id'");
+                    while($total = mysqli_fetch_assoc($totals)){
                 ?>
                 <div><b><?="Rp. ".number_format($total['total'])?></b></div>
                 <?php } ?>
@@ -113,6 +133,7 @@
                     <div class="form-group">
                         <label for="Kategori">Kategori</label>
                         <select name="kategori" class="form-control" id="Kategori">
+                              <option value=0>PEKERJAAN LAIN-LAIN</option>
                             <?php
                             $kategori1 =  mysqli_query($koneksi, "SELECT * FROM kategori");
                             while($kategori = mysqli_fetch_array($kategori1)){ ?>

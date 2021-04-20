@@ -6,10 +6,10 @@ $id =  $_GET['id'];
 $where = array('id' => $id);
 
 $query = "SELECT * FROM v_pemesanan WHERE id='$id'";      
-$result = mysqli_query($koneksi,$query);
+$results = mysqli_query($koneksi,$query);
 $pdf = new FPDF();
 $pdf->AddPage();
-while($result = mysqli_fetch_assoc($result)){
+while($result = mysqli_fetch_assoc($results)){
 
     $pdf->SetFont('Arial','B',16);
     $pdf->Cell(190,7,'Pesanan Pelanggan',0,1,'C');

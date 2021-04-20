@@ -198,5 +198,24 @@
 </div>
 
 <?php
-    include "./template/footer.php";
+
+  $jsonString = file_get_contents('./assets/kunjungan.json');
+  $data = json_decode($jsonString, true);
+  $arr = array();
+  if(!empty($data)){
+    if($data['tanggal'] == date('Y-m-d')){
+      $arr['tanggal'] = date('Y-m-d');
+      $arr['total_kunjungan'] = $data['total_kunjungan']+1 ;
+    }else{
+      $arr['tanggal'] = date('Y-m-d');
+      $arr['total_kunjungan'] = 1 ;
+    }
+  }else{
+    $arr['tanggal'] = date('Y-m-d');
+    $arr['total_kunjungan'] = 1 ;
+  }
+  $newJsonString = json_encode($arr);
+  file_put_contents('./assets/kunjungan.json', $newJsonString);
+
+  include "./template/footer.php";
 ?>
