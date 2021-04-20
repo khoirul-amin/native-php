@@ -81,7 +81,7 @@
                 <div class="mr-auto">Jumlah</div>
                 <?php
                     $total = mysqli_query($koneksi,"SELECT SUM(total) AS total FROM detail_konstruksi WHERE id_pemesanan='$id'");
-                    while($total = mysqli_fetch_array($total)){
+                    while($total = mysqli_fetch_assoc($total)){
                 ?>
                 <div><b><?="Rp. ".number_format($total['total'])?></b></div>
                 <?php } ?>

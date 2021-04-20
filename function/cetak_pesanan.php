@@ -9,7 +9,7 @@ $query = "SELECT * FROM v_pemesanan WHERE id='$id'";
 $result = mysqli_query($koneksi,$query);
 $pdf = new FPDF();
 $pdf->AddPage();
-while($result = mysqli_fetch_array($result)){
+while($result = mysqli_fetch_assoc($result)){
 
     $pdf->SetFont('Arial','B',16);
     $pdf->Cell(190,7,'Pesanan Pelanggan',0,1,'C');

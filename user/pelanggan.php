@@ -33,7 +33,9 @@
 
   <!-- Page content -->
   <div class="container-fluid mt--6">
-    <?php if($_GET['pesan'] == 'success'){ ?>
+    <?php
+    if(!empty($_GET['pesan'])){
+    if($_GET['pesan'] == 'success'){ ?>
     <div class="alert alert-success alert-dismissible fade show" role="alert">
         <strong>Register berhasil !</strong> Silahkan login elalui halaman login.
         <button type="button" class="close btn" data-dismiss="alert" aria-label="Close">
@@ -56,7 +58,7 @@
             <span aria-hidden="true">&times;</span>
         </button>
     </div>
-    <?php } ?>
+    <?php } } ?>
     <div class="row">
       <div class="col-xl-12">
           <button type="button" class="btn btn-success mb-2"
@@ -88,7 +90,7 @@
                 <tr>
                     <td><?=$pelanggan['nama'];?></td>
                     <td><?=$pelanggan['tgl_lahir'];?></td>
-                    <td><?=$pelanggan['nik'];?></td>
+                    <td><?=$pelanggan['NIK'];?></td>
                     <td><?=$pelanggan['no_telp'];?></td>
                     <td><?=$pelanggan['email'];?></td>
                     <td><?=$pelanggan['alamat'];?></td>

@@ -63,7 +63,14 @@
               <div class="row">
                 <div class="col">
                   <h5 class="card-title text-uppercase text-muted mb-2">Pesanan Baru</h5>
-                  <span class="h2 font-weight-bold mb-0">0</span>
+                  <span class="h2 font-weight-bold mb-0">
+                  <?php
+                    $jumlah = mysqli_query($koneksi,"SELECT COUNT(id) AS id FROM pemesanan WHERE status=1");
+                    while($jml = mysqli_fetch_array($jumlah)){
+                      echo $jml['id'];
+                    }
+                  ?>
+                  </span>
                 </div>
                 <div class="col-auto">
                   <div class="icon icon-shape bg-gradient-orange text-white rounded-circle shadow">
@@ -81,7 +88,9 @@
               <div class="row">
                 <div class="col">
                   <h5 class="card-title text-uppercase text-muted mb-2">Total Kunjungan Hari Ini</h5>
-                  <span class="h2 font-weight-bold mb-0">924</span>
+                  <span class="h2 font-weight-bold mb-0">
+                  50
+                  </span>
                 </div>
                 <div class="col-auto">
                   <div class="icon icon-shape bg-gradient-green text-white rounded-circle shadow">

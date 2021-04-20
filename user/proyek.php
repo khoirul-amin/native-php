@@ -123,15 +123,15 @@
                 while($pesanan = mysqli_fetch_array($result)){ 
                 $no++;
                 $btn_rab = "";
+                $btn_url_desain = "";
     
                 if($pesanan['status'] == 2){
                     $status = "Proses";
                     $id = $pesanan['id'];
                     $url_desain = $pesanan['desain_rumah'];
-                    $btn_url_desain = "";
                     if(!empty($url_desain)){
                         $btn_url_desain = "
-                        <a  download href='..//assets/pdfUpload/$url_desain'
+                        <a  download href='../assets/pdfUpload/$url_desain'
                         class='btn btn-success btn-sm'>
                         <i class='fas fa-eye'></i> Desain
                         </a>";
