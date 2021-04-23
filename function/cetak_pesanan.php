@@ -41,10 +41,12 @@ while($result = mysqli_fetch_assoc($results)){
     $pdf->Cell(40,12,"Referensi",1,0);
     $pdf->MultiCell(150,6,$result['referensi'],1,1);
 
+
+    $pdf->SetTitle('Pesanan');
+
+    // $pdf->Output();
+    $pdf->Output('D', 'Pesanan'.$result['invoice'].'.pdf');
+
+
 }
-
-$pdf->SetTitle('Pesanan');
-
-// $pdf->Output();
-$pdf->Output('D', 'Pesanan'.$result['invoice'].'.pdf');
 ?>
