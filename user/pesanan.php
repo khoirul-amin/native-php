@@ -60,11 +60,15 @@
                     $no++;
         
                     $btn_url_desain = "";
+                    $rab = "";
                     if($pesanan['status'] == 2){
                         $status = "Proses";
                         $id = $pesanan['id'];
                         $url_desain = $pesanan['desain_rumah'];
                         if(!empty($url_desain)){
+                            $rab = "<a href='../function/cetak.php?id=<?=$id?>' target='new' class='btn btn-danger btn-sm'>
+                            <i class='fas fa-file'></i> RAB
+                            </a>";
                             $btn_url_desain = "<a download href='../assets/pdfUpload/$url_desain'
                             class='btn btn-success btn-sm'>
                             <i class='fas fa-eye'></i> Desain
@@ -94,15 +98,12 @@
                     <td><?=$pesanan['admin'];?></td>
 			        <td><?=$status?></td>
                     <td>
-                        <a href="../function/cetak.php?id=<?=$pesanan['id']?>" target="new" class="btn btn-danger mb-2 btn-sm">
-                            <i class="fas fa-file"></i> RAB
-                        </a>
 						<button type='button' class='btn btn-success btn-sm'
 						data-toggle='modal' data-target='#modalView'
 						onclick="viewInformasi('<?=$pesanan['nama']?>','<?=$pesanan['nik']?>',
                         '<?=$pesanan['model']?>','<?=$pesanan['ukuran']?>','<?=$pesanan['kamar']?>','<?=$pesanan['kamar_mandi']?>','<?=$pesanan['alamat']?>','<?=$pesanan['no_telp']?>','<?=$pesanan['lantai']?>','<?=$pesanan['luas_bangunan']?>','<?=$pesanan['garasi']?>','<?=$pesanan['referensi']?>','<?=$pesanan['pesan']?>','<?=$pesanan['id']?>')"
 						><i class='fas fa-eye'></i> Detail</button>
-                        <?=$button_bukti.$btn_url_desain?>
+                        <?=$rab.$button_bukti.$btn_url_desain?>
                     </td>
                 </tr>
             <?php } ?>
