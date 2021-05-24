@@ -186,7 +186,7 @@
         <div class="card" style="width: 18rem;">
           <img src="./assets/img/imageUpload/<?=$portfolio['image']?>" class="card-img-top" alt="...">
           <div class="card-body">
-            <h5><b><?=$portfolio->judul?></b></h5>
+            <h5><b><?=$portfolio['judul']?></b></h5>
             <p class="card-text"><?=substr($portfolio['isi'],0,100)?></p>
             <a href="#" class="link-more">Read More</a>
           </div>

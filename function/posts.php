@@ -15,7 +15,7 @@ $tanggal = date('Y-m-d H:i:s');
 if(!empty($_POST['id'])){
     $id = $_POST['id'];
     if($_FILES["image"]["name"]){
-        $image_name = 'Image-'.date("Y-m-d_H_i_s");
+        $image_name = 'Image-'.date("Y-m-d-H-i-s");
         $tipe_image = pathinfo($_FILES["image"]["name"], PATHINFO_EXTENSION);
         $file_name =  $image_name.'.'.$tipe_image;
         $sql = mysqli_query($koneksi,"SELECT * FROM posts WHERE id='$id'");
@@ -35,7 +35,7 @@ if(!empty($_POST['id'])){
     }
 }else{
     if($_FILES["image"]["name"]){
-        $image_name = 'Image-'.date("Y-m-d_H_i_s");
+        $image_name = 'Image-'.date("Y-m-d-H-i-s");
         $tipe_image = pathinfo($_FILES["image"]["name"], PATHINFO_EXTENSION);
         $file_name =  $image_name.'.'.$tipe_image;
 

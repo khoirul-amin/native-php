@@ -127,12 +127,8 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="inputKeterangan">Keterangan</label>
-                        <input type="text" name="keterangan" class="form-control" id="inputKeterangan" placeholder="..." required>
-                    </div>
-                    <div class="form-group">
                         <label for="Kategori">Kategori</label>
-                        <select name="kategori" class="form-control" id="Kategori">
+                        <select name="kategori" class="form-control" id="Kategori" onchange="getKeterangan()">
                               <option value=0>PEKERJAAN LAIN-LAIN</option>
                             <?php
                             $kategori1 =  mysqli_query($koneksi, "SELECT * FROM kategori");
@@ -140,6 +136,12 @@
                                 <option value=<?=$kategori['id']?>><?=$kategori['nama_kategori'];?></option>
                             <?php }; ?>
                         </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputKeterangan">Keterangan</label>
+                        <select name="keterangan" class="form-control" id="inputKeterangan" onchange="getKeterangan()">
+                        </select>
+                        <!-- <input type="text" name="keterangan" class="form-control" id="inputKeterangan" placeholder="..." required> -->
                     </div>
                     <div class="form-group">
                         <label for="inputSatuan">Satuan</label>
@@ -164,5 +166,28 @@
 
 </div>
 
+<script>
+  function getKeterangan(){
+    var id = document.getElementById("Kategori").value;
+    if(id != 0){
+      $.ajax({
+          type: "GET",
+          url: `../function/get_keterangan.php?id=${id}`,
+          cache: false,
+          success: function(data){
+            
+          }
+      })
+    }
+  } 
+
+  function setDataKeterangan(){
+
+  }
+  function clearForm(data){
+      $('#id').val('')
+      document.getElementById(data).reset();
+  }
+</script>
 
 <?php include './script.php';?>

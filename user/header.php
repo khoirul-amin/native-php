@@ -62,36 +62,44 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link <?php if($uri_segments[2] == 'index.php'){echo 'active';} ?>" href="../user/index.php">
+              <a class="nav-link <?php if($uri_segments[3] == 'index.php'){echo 'active';} ?>" href="../user/index.php">
                 <i class="ni ni-tv-2 text-primary"></i>
                 <span class="nav-link-text">Dashboard</span>
               </a>
             </li>
             <?php if($session->role == 2 || $session->role == 1){?>
             <li class="nav-item">
-              <a class="nav-link <?php if($uri_segments[2] == 'pelanggan.php'){echo 'active';} ?>" href="../user/pelanggan.php">
+              <a class="nav-link <?php if($uri_segments[3] == 'pelanggan.php'){echo 'active';} ?>" href="../user/pelanggan.php">
                 <i class="fas fa-users text-green"></i>
                 <span class="nav-link-text">Data Pelanggan</span>
               </a>
             </li>
             <?php };  if($session->role == 1){?>
             <li class="nav-item">
-              <a class="nav-link <?php if($uri_segments[2] == 'karyawan.php'){echo 'active';} ?>" href="../user/karyawan.php">
+              <a class="nav-link <?php if($uri_segments[3] == 'karyawan.php'){echo 'active';} ?>" href="../user/karyawan.php">
                 <i class="fas fa-users-cog text-warning"></i>
                 <span class="nav-link-text">Data Karyawan</span>
               </a>
             </li>
             <?php };  if($session->role == 2 || $session->role == 1){?>
             <li class="nav-item">
-              <a class="nav-link <?php if($uri_segments[2] == 'kategori.php'){echo 'active';} ?>" 
+              <a class="nav-link <?php if($uri_segments[3] == 'kategori.php'){echo 'active';} ?>" 
                 href="../user/kategori.php">
                 <i class="fas fa-list text-green"></i>
                 <span class="nav-link-text">Kategori RAB</span>
               </a>
             </li>
+            <?php };    if($session->role == 2 || $session->role == 1){?>
+            <li class="nav-item">
+              <a class="nav-link <?php if($uri_segments[3] == 'keterangan.php'){echo 'active';} ?>" 
+                href="../user/keterangan.php">
+                <i class="fas fa-list text-green"></i>
+                <span class="nav-link-text">Keterangan RAB</span>
+              </a>
+            </li>
             <?php };  if($session->role == 2 || $session->role == 1){?>
             <li class="nav-item">
-              <a class="nav-link <?php if($uri_segments[2] == 'posts.php'){echo 'active';} ?>" 
+              <a class="nav-link <?php if($uri_segments[3] == 'posts.php'){echo 'active';} ?>" 
                 href="../user/posts.php">
                 <i class="fas fa-paste text-primary"></i>
                 <span class="nav-link-text">Posts</span>
@@ -99,21 +107,21 @@
             </li>
             <?php };  if($session->role == 2 || $session->role == 1){?>
             <li class="nav-item">
-              <a class="nav-link <?php if($uri_segments[2] == 'proyek.php'){echo 'active';} ?>" href="../user/proyek.php">
+              <a class="nav-link <?php if($uri_segments[3] == 'proyek.php'){echo 'active';} ?>" href="../user/proyek.php">
                 <i class="fas fa-building text-primary"></i>
                 <span class="nav-link-text">Data Proyek</span>
               </a>
             </li>
             <?php };   if($session->role == 3){?>
             <li class="nav-item">
-              <a class="nav-link <?php if($uri_segments[2] == 'pesanan.php'){echo 'active';} ?>" href="../user/pesanan.php">
+              <a class="nav-link <?php if($uri_segments[3] == 'pesanan.php'){echo 'active';} ?>" href="../user/pesanan.php">
                 <i class="fas fa-building text-primary"></i>
                 <span class="nav-link-text">Data Pesanan</span>
               </a>
             </li>
             <?php }; ?>
             <li class="nav-item">
-              <a class="nav-link <?php if($uri_segments[2] == 'setting.php'){echo 'active';} ?>" href="../user/setting.php">
+              <a class="nav-link <?php if($uri_segments[3] == 'setting.php'){echo 'active';} ?>" href="../user/setting.php">
                 <i class="fas fa-cog text-default"></i>
                 <span class="nav-link-text">Setting</span>
               </a>
