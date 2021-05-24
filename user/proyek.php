@@ -124,11 +124,18 @@
                 $no++;
                 $btn_rab = "";
                 $btn_url_desain = "";
+                $upload_desain = "";
     
                 if($pesanan['status'] == 2){
                     $status = "Proses";
                     $id = $pesanan['id'];
                     $url_desain = $pesanan['desain_rumah'];
+                    $upload_desain = "<button type='button' 
+                    onClick=\"setIDForm('$id')\" 
+                    data-toggle='modal' data-target='#modalUpload'
+                    class='btn btn-success btn-sm'>
+                    <i class='far fa-file-alt'></i> Upload Desain
+                    </button>";
                     if(!empty($url_desain)){
                         $btn_url_desain = "
                         <a  download href='../assets/pdfUpload/$url_desain'
@@ -136,13 +143,9 @@
                         <i class='fas fa-eye'></i> Desain
                         </a>";
                     }
-                    $btn_rab = "<button type='button' 
-                            onClick=\"setIDForm('$id')\" 
-                            data-toggle='modal' data-target='#modalUpload'
-                            class='btn btn-success btn-sm'>
-                            <i class='far fa-file-alt'></i> Upload Desain
-                            </button>
-                            <a href='../user/rab.php?id=$id' class='btn btn-success btn-sm'><i class='far fa-file-alt'></i> RAB</a>";
+                    if(!empty($pesanan['desain_rumah'])){
+                        $btn_rab = "<a href='../user/rab.php?id=$id' class='btn btn-success btn-sm'><i class='far fa-file-alt'></i> RAB</a>";
+                    }
                 }elseif($pesanan['status'] == 3){
                     $status = "Reject";
                 }elseif($pesanan['status'] == 4){
@@ -175,7 +178,7 @@
 						data-toggle='modal' data-target='#modalView'
 						onclick="viewInformasi('<?=$pesanan['nama']?>','<?=$pesanan['nik']?>','<?=$pesanan['model']?>','<?=$pesanan['ukuran']?>','<?=$pesanan['kamar']?>','<?=$pesanan['kamar_mandi']?>','<?=$pesanan['alamat']?>','<?=$pesanan['no_telp']?>','<?=$pesanan['lantai']?>','<?=$pesanan['luas_bangunan']?>','<?=$pesanan['garasi']?>','<?=$pesanan['referensi']?>','<?=$pesanan['pesan']?>','<?=$pesanan['id']?>')"
 						><i class='fas fa-eye'></i></button>
-                        <?=$btn_rab.$button_bukti.$btn_url_desain?>
+                        <?=$upload_desain.$btn_rab.$button_bukti.$btn_url_desain?>
                     </td>
                 </tr>
             <?php }; ?>

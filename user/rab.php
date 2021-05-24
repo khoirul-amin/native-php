@@ -137,11 +137,9 @@
                             <?php }; ?>
                         </select>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" id="ket">
                         <label for="inputKeterangan">Keterangan</label>
-                        <select name="keterangan" class="form-control" id="inputKeterangan" onchange="getKeterangan()">
-                        </select>
-                        <!-- <input type="text" name="keterangan" class="form-control" id="inputKeterangan" placeholder="..." required> -->
+                        <input type="text" name="keterangan" class="form-control" id="inputKeterangan" placeholder="..." required>
                     </div>
                     <div class="form-group">
                         <label for="inputSatuan">Satuan</label>
@@ -153,7 +151,7 @@
                     </div>
                     <div class="form-group">
                         <label for="inputVolume">Volume</label>
-                        <input type="number" name="volume" class="form-control" id="inputVolume" placeholder="..." required>
+                        <input type="number" step="any" name="volume" class="form-control" id="inputVolume" placeholder="..." required>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -170,22 +168,50 @@
   function getKeterangan(){
     var id = document.getElementById("Kategori").value;
     if(id != 0){
+      $('#inputKeterangan').remove()
+      $('#ket').append('<select name="keterangan" class="form-control" id="inputKeterangan"></select>');
       $.ajax({
           type: "GET",
           url: `../function/get_keterangan.php?id=${id}`,
           cache: false,
           success: function(data){
-            
+            setDataKeterangan(data)
           }
       })
+    }else{
+      $('#inputKeterangan').remove()
+      $('#ket').append('<input type="text" name="keterangan" class="form-control" id="inputKeterangan" placeholder="..." required>');
+      $('#inputSatuan').val('');
+      $('#inputHargaSatuan').val('');
+      $('#inputVolume').val('');
     }
   } 
 
-  function setDataKeterangan(){
-
+  function setDataKeterangan(datas){
+    $('#inputKeterangan').empty();
+    $('#inputSatuan').val('');
+    $('#inputHargaSatuan').val('');
+    $('#inputVolume').val('');
+    datas.map((data,i) => {
+      var ket = document.getElementById("inputKeterangan");
+      var option = document.createElement("option");
+      option.text = data.keterangan;
+      option.value = data.keterangan;
+      ket.add(option);
+      if(i == 0){
+        addLainLain(data);
+      }
+    });
+  }
+  function addLainLain(data){
+    // console.log(data);
+    $('#inputSatuan').val(data.satuan);
+    $('#inputHargaSatuan').val(data.harga);
+    // $('#inputVolume').val(data.volume);
   }
   function clearForm(data){
       $('#id').val('')
+      $('#inputKeterangan').empty()
       document.getElementById(data).reset();
   }
 </script>

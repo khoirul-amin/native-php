@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.4
+-- version 5.1.0
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:3306
--- Generation Time: Apr 07, 2021 at 10:52 PM
--- Server version: 5.7.33-0ubuntu0.18.04.1
--- PHP Version: 7.4.16
+-- Host: 127.0.0.1
+-- Generation Time: May 24, 2021 at 08:52 PM
+-- Server version: 10.4.18-MariaDB
+-- PHP Version: 7.4.18
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `konsturksi`
+-- Database: `konstruksi`
 --
 
 -- --------------------------------------------------------
@@ -35,7 +35,7 @@ CREATE TABLE `detail_konstruksi` (
   `satuan` varchar(100) DEFAULT NULL,
   `harga_satuan` int(11) DEFAULT NULL,
   `total` int(11) DEFAULT NULL,
-  `volume` int(11) DEFAULT NULL
+  `volume` varchar(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -43,9 +43,13 @@ CREATE TABLE `detail_konstruksi` (
 --
 
 INSERT INTO `detail_konstruksi` (`id`, `id_pemesanan`, `id_kategori`, `keterangan`, `satuan`, `harga_satuan`, `total`, `volume`) VALUES
-(1, 1, 2, 'Pengukuran dan Bouplank', 'Sak', 70000, 700000, 10),
-(2, 1, 2, 'Laporan & Photo Proyek,K3/Safety', 'Sak', 10000, 30000, 3),
-(3, 2, 5, 'Atap Galvalum + RangkabBaja Ringan t. 0,75 mm', 'Sak', 100000, 1000000, 10);
+(1, 1, 2, 'Pengukuran dan Bouplank', 'Sak', 70000, 700000, '10'),
+(2, 1, 2, 'Laporan & Photo Proyek,K3/Safety', 'Sak', 10000, 30000, '3'),
+(3, 2, 5, 'Atap Galvalum + RangkabBaja Ringan t. 0,75 mm', 'Sak', 100000, 1000000, '10'),
+(4, 2, 2, 'Tiang Pancang', 'unit', 1000000, 10000000, '10'),
+(5, 2, 3, 'Semen Tiga Roda', 'sak', 100000, 300000, '3'),
+(6, 0, 3, 'Semen Tiga Roda', 'sak', 100000, 240000, '2'),
+(7, 2, 2, 'Tiang Pancang', 'unit', 1000000, 2500000, '2.5');
 
 -- --------------------------------------------------------
 
@@ -68,6 +72,29 @@ INSERT INTO `kategori` (`id`, `nama_kategori`, `timestamp`) VALUES
 (3, 'PEKERJAAN PONDASI DAN TANAH', '2021-04-02 16:46:00'),
 (4, 'PEKERJAAN BETON DAN STRUKTUR', '2021-04-02 16:46:22'),
 (5, 'PEKERJAAN LAIN-LAIN', '2021-04-02 16:46:39');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `keterangan`
+--
+
+CREATE TABLE `keterangan` (
+  `id` int(11) NOT NULL,
+  `id_kategori` int(11) DEFAULT NULL,
+  `keterangan` varchar(50) DEFAULT NULL,
+  `satuan` varchar(20) DEFAULT NULL,
+  `harga` int(15) DEFAULT NULL,
+  `timestamp` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `keterangan`
+--
+
+INSERT INTO `keterangan` (`id`, `id_kategori`, `keterangan`, `satuan`, `harga`, `timestamp`) VALUES
+(2, 3, 'Semen Tiga Roda', 'sak', 100000, '2021-05-24 01:05:25'),
+(3, 2, 'Tiang Pancang', 'unit', 1000000, '2021-05-24 01:05:33');
 
 -- --------------------------------------------------------
 
@@ -101,8 +128,8 @@ CREATE TABLE `pemesanan` (
 --
 
 INSERT INTO `pemesanan` (`id`, `user_id`, `admin_id`, `invoice`, `ukuran`, `lantai`, `luas_bangunan`, `id_model`, `kamar`, `kamar_mandi`, `garasi`, `referensi`, `pesan`, `tanggal`, `status`, `bukti_pembayaran`, `desain_rumah`, `ket_ditolak`) VALUES
-(1, 4, 4, 'BB001', '10x5', '1', '100', 2, '2', '2', '1', 'https://www.emporioarchitect.com/desain-rumah/desain-rumah-modern-1-lantai-bapak-annas-di-jepara-jaw', NULL, '2021-04-04 11:38:30', 3, NULL, 'pdf-2021-04-05_14_45_02.pdf', 'Gagal'),
-(2, 4, 4, 'BB002', '10x5', '1', '100', 2, '2', '2', '1', 'https://www.emporioarchitect.com/desain-rumah/desain-rumah-modern-1-lantai-bapak-annas-di-jepara-jaw', NULL, '2021-04-04 11:41:45', 2, 'Image-2021-04-05_15_18_18.png', NULL, 'Sedang di proses'),
+(1, 4, 4, 'BB001', '10x5', '1', '100', 2, '2', '2', '1', 'https://www.emporioarchitect.com/desain-rumah/desain-rumah-modern-1-lantai-bapak-annas-di-jepara-jaw', NULL, '2021-04-04 11:38:30', 3, NULL, NULL, 'Gagal'),
+(2, 4, 4, 'BB002', '10x5', '1', '100', 2, '2', '2', '1', 'https://www.emporioarchitect.com/desain-rumah/desain-rumah-modern-1-lantai-bapak-annas-di-jepara-jaw', NULL, '2021-04-04 11:41:45', 2, 'Image-2021-04-05_15_18_18.png', 'File-2021-05-24_20_45_12.pdf', 'Sedang di proses'),
 (3, 4, NULL, 'BB003', '10x5', '1', '100', 2, '3', '2', '1', 'https://www.emporioarchitect.com/desain-rumah/desain-rumah-modern-1-lantai-bapak-annas-di-jepara-jaw', NULL, '2021-04-04 11:50:52', 1, NULL, NULL, NULL),
 (4, 4, NULL, 'B004', '10x5', '', '100', 2, '3', '2', '1', 'https://www.emporioarchitect.com/desain-rumah/desain-rumah-modern-1-lantai-bapak-annas-di-jepara-jaw', NULL, '2021-04-07 15:00:56', 1, NULL, NULL, NULL);
 
@@ -145,8 +172,8 @@ CREATE TABLE `posts` (
 --
 
 INSERT INTO `posts` (`id`, `judul`, `image`, `isi`, `tanggal`, `slug`, `author`, `jenis`) VALUES
-(1, 'Rumah Ibu Kemuning', 'Image-2021-04-03_12_04_23.png', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', '2021-04-04 11_17_46', 'rumah-ibu-kemuning', 'Khoirul Amin', 1),
-(2, 'Rumah Pribadi', 'Image-2021-04-03_00_50_59.png', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', '2021-04-04 11_17_30', 'rumah-pribadi', 'Khoirul Amin', 2);
+(1, 'Rumah Ibu Kemuning', 'Image-2021-04-03-12-04-23.png', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', '2021-04-04 11:17:46', 'rumah-ibu-kemuning', 'Khoirul Amin', 1),
+(2, 'Rumah Pribadi', 'Image-2021-04-03-00-50-59.png', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', '2021-04-04 11:17:30', 'rumah-pribadi', 'Khoirul Amin', 2);
 
 -- --------------------------------------------------------
 
@@ -174,10 +201,26 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `username`, `password`, `email`, `NIK`, `tgl_lahir`, `nama`, `no_telp`, `alamat`, `role`, `timestamps`, `avatar`) VALUES
-(1, 'admin', '$2y$12$I0srEG/ORI6EV6j475e5mugn7KKrTc6.RVnCIu2s/aXjXDHCxLjW.', 'admin@gmail.com', '3524150311900014', '1998-01-03', 'Super USer', '085967276070', 'Jl. Sidorame, Ds. Tebluru, Kec. Solokuro, Kab. Lamongan.', 1, '2021-04-07 15:08:02', NULL),
-(4, 'users', '$2y$12$25ljTg8UPp4EJgSHY43Ln.2QQjNKoyjDupWHypbYuw/i.CA/yY02a', 'users@gmail.com', '3524150311900015', '1998-01-03', 'User Login', '085967276072', 'Jl. Sidorame, Ds. Tebluru, Kec. Solokuro, Kab. Lamongan.', 3, '2021-04-07 15:20:45', 'Image-2021-04-03_12_15_51.jpeg'),
-(6, 'user1', '$2y$12$25ljTg8UPp4EJgSHY43Ln.2QQjNKoyjDupWHypbYuw/i.CA/yY02a', 'oke@gmail.com', '3524150311900016', '2021-04-07', 'Ahmad Khoirul Amin', '085967276071', 'Jl. Sidorame, Ds. Tebluru, Kec. Solokuro, Kab. Lamongan.', 2, '2021-04-01 18:01:45', NULL);
+INSERT INTO `users` (`id`, `username`, `password`, `email`, `NIK`, `tgl_lahir`, `nama`, `no_telp`, `alamat`, `role`, `otp`, `timestamps`, `avatar`) VALUES
+(1, 'admin', 'admin', 'admin@gmail.com', '3524150311900014', '1998-01-03', 'Super USer', '085967276070', 'Jl. Sidorame, Ds. Tebluru, Kec. Solokuro, Kab. Lamongan.', 1, NULL, '2021-04-07 15:08:02', NULL),
+(4, 'users', 'users', 'users@gmail.com', '3524150311900015', '1998-01-03', 'User Login', '085967276072', 'Jl. Sidorame, Ds. Tebluru, Kec. Solokuro, Kab. Lamongan.', 3, NULL, '2021-04-07 15:20:45', 'Image-2021-04-03_12_15_51.jpeg'),
+(6, 'user1', 'user1', 'oke@gmail.com', '3524150311900016', '2021-04-07', 'Ahmad Khoirul Amin', '085967276071', 'Jl. Sidorame, Ds. Tebluru, Kec. Solokuro, Kab. Lamongan.', 2, NULL, '2021-04-01 18:01:45', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `v_keterangan`
+-- (See below for the actual view)
+--
+CREATE TABLE `v_keterangan` (
+`id` int(11)
+,`id_kategori` int(11)
+,`keterangan` varchar(50)
+,`satuan` varchar(20)
+,`harga` int(15)
+,`timestamp` timestamp
+,`nama_kategori` varchar(100)
+);
 
 -- --------------------------------------------------------
 
@@ -197,7 +240,7 @@ CREATE TABLE `v_pemesanan` (
 ,`kamar` varchar(50)
 ,`kamar_mandi` varchar(50)
 ,`garasi` varchar(50)
-,`referensi` varchar(100)
+,`referensi` varchar(255)
 ,`pesan` varchar(100)
 ,`tanggal` timestamp
 ,`status` int(11)
@@ -231,7 +274,7 @@ CREATE TABLE `v_pesan_menunggu` (
 ,`kamar` varchar(50)
 ,`kamar_mandi` varchar(50)
 ,`garasi` varchar(50)
-,`referensi` varchar(100)
+,`referensi` varchar(255)
 ,`pesan` varchar(100)
 ,`tanggal` timestamp
 ,`status` int(11)
@@ -264,7 +307,7 @@ CREATE TABLE `v_pesan_proses` (
 ,`kamar` varchar(50)
 ,`kamar_mandi` varchar(50)
 ,`garasi` varchar(50)
-,`referensi` varchar(100)
+,`referensi` varchar(255)
 ,`pesan` varchar(100)
 ,`tanggal` timestamp
 ,`status` int(11)
@@ -282,11 +325,20 @@ CREATE TABLE `v_pesan_proses` (
 -- --------------------------------------------------------
 
 --
+-- Structure for view `v_keterangan`
+--
+DROP TABLE IF EXISTS `v_keterangan`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `v_keterangan`  AS SELECT `keterangan`.`id` AS `id`, `keterangan`.`id_kategori` AS `id_kategori`, `keterangan`.`keterangan` AS `keterangan`, `keterangan`.`satuan` AS `satuan`, `keterangan`.`harga` AS `harga`, `keterangan`.`timestamp` AS `timestamp`, `kategori`.`nama_kategori` AS `nama_kategori` FROM (`keterangan` join `kategori`) WHERE `kategori`.`id` = `keterangan`.`id_kategori` ;
+
+-- --------------------------------------------------------
+
+--
 -- Structure for view `v_pemesanan`
 --
 DROP TABLE IF EXISTS `v_pemesanan`;
 
-CREATE VIEW `v_pemesanan`  AS SELECT `pemesanan`.`id` AS `id`, `pemesanan`.`user_id` AS `user_id`, `pemesanan`.`admin_id` AS `admin_id`, `pemesanan`.`invoice` AS `invoice`, `pemesanan`.`ukuran` AS `ukuran`, `pemesanan`.`lantai` AS `lantai`, `pemesanan`.`luas_bangunan` AS `luas_bangunan`, `pemesanan`.`id_model` AS `id_model`, `pemesanan`.`kamar` AS `kamar`, `pemesanan`.`kamar_mandi` AS `kamar_mandi`, `pemesanan`.`garasi` AS `garasi`, `pemesanan`.`referensi` AS `referensi`, `pemesanan`.`pesan` AS `pesan`, `pemesanan`.`tanggal` AS `tanggal`, `pemesanan`.`status` AS `status`, `pemesanan`.`bukti_pembayaran` AS `bukti_pembayaran`, `pemesanan`.`ket_ditolak` AS `ket_ditolak`, `pemesanan`.`desain_rumah` AS `desain_rumah`, `users`.`NIK` AS `nik`, `users`.`nama` AS `nama`, (select `users`.`nama` from `users` where (`users`.`id` = `pemesanan`.`admin_id`)) AS `admin`, `users`.`alamat` AS `alamat`, `users`.`email` AS `email`, `users`.`no_telp` AS `no_telp`, `posts`.`judul` AS `model` FROM ((`users` join `posts`) join `pemesanan`) WHERE ((`pemesanan`.`user_id` = `users`.`id`) AND (`pemesanan`.`id_model` = `posts`.`id`)) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `v_pemesanan`  AS SELECT `pemesanan`.`id` AS `id`, `pemesanan`.`user_id` AS `user_id`, `pemesanan`.`admin_id` AS `admin_id`, `pemesanan`.`invoice` AS `invoice`, `pemesanan`.`ukuran` AS `ukuran`, `pemesanan`.`lantai` AS `lantai`, `pemesanan`.`luas_bangunan` AS `luas_bangunan`, `pemesanan`.`id_model` AS `id_model`, `pemesanan`.`kamar` AS `kamar`, `pemesanan`.`kamar_mandi` AS `kamar_mandi`, `pemesanan`.`garasi` AS `garasi`, `pemesanan`.`referensi` AS `referensi`, `pemesanan`.`pesan` AS `pesan`, `pemesanan`.`tanggal` AS `tanggal`, `pemesanan`.`status` AS `status`, `pemesanan`.`bukti_pembayaran` AS `bukti_pembayaran`, `pemesanan`.`ket_ditolak` AS `ket_ditolak`, `pemesanan`.`desain_rumah` AS `desain_rumah`, `users`.`NIK` AS `nik`, `users`.`nama` AS `nama`, (select `users`.`nama` from `users` where `users`.`id` = `pemesanan`.`admin_id`) AS `admin`, `users`.`alamat` AS `alamat`, `users`.`email` AS `email`, `users`.`no_telp` AS `no_telp`, `posts`.`judul` AS `model` FROM ((`users` join `posts`) join `pemesanan`) WHERE `pemesanan`.`user_id` = `users`.`id` AND `pemesanan`.`id_model` = `posts`.`id` ;
 
 -- --------------------------------------------------------
 
@@ -295,7 +347,7 @@ CREATE VIEW `v_pemesanan`  AS SELECT `pemesanan`.`id` AS `id`, `pemesanan`.`user
 --
 DROP TABLE IF EXISTS `v_pesan_menunggu`;
 
-CREATE VIEW `v_pesan_menunggu`  AS SELECT `pemesanan`.`id` AS `id`, `pemesanan`.`user_id` AS `user_id`, `pemesanan`.`admin_id` AS `admin_id`, `pemesanan`.`invoice` AS `invoice`, `pemesanan`.`ukuran` AS `ukuran`, `pemesanan`.`lantai` AS `lantai`, `pemesanan`.`luas_bangunan` AS `luas_bangunan`, `pemesanan`.`id_model` AS `id_model`, `pemesanan`.`kamar` AS `kamar`, `pemesanan`.`kamar_mandi` AS `kamar_mandi`, `pemesanan`.`garasi` AS `garasi`, `pemesanan`.`referensi` AS `referensi`, `pemesanan`.`pesan` AS `pesan`, `pemesanan`.`tanggal` AS `tanggal`, `pemesanan`.`status` AS `status`, `pemesanan`.`bukti_pembayaran` AS `bukti_pembayaran`, `pemesanan`.`ket_ditolak` AS `ket_ditolak`, `users`.`NIK` AS `nik`, `users`.`nama` AS `nama`, `users`.`alamat` AS `alamat`, (select `users`.`nama` from `users` where (`users`.`id` = `pemesanan`.`admin_id`)) AS `admin`, `users`.`email` AS `email`, `users`.`no_telp` AS `no_telp`, `posts`.`judul` AS `model` FROM ((`users` join `posts`) join `pemesanan`) WHERE ((`pemesanan`.`user_id` = `users`.`id`) AND (`pemesanan`.`id_model` = `posts`.`id`) AND (`pemesanan`.`status` = 1)) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `v_pesan_menunggu`  AS SELECT `pemesanan`.`id` AS `id`, `pemesanan`.`user_id` AS `user_id`, `pemesanan`.`admin_id` AS `admin_id`, `pemesanan`.`invoice` AS `invoice`, `pemesanan`.`ukuran` AS `ukuran`, `pemesanan`.`lantai` AS `lantai`, `pemesanan`.`luas_bangunan` AS `luas_bangunan`, `pemesanan`.`id_model` AS `id_model`, `pemesanan`.`kamar` AS `kamar`, `pemesanan`.`kamar_mandi` AS `kamar_mandi`, `pemesanan`.`garasi` AS `garasi`, `pemesanan`.`referensi` AS `referensi`, `pemesanan`.`pesan` AS `pesan`, `pemesanan`.`tanggal` AS `tanggal`, `pemesanan`.`status` AS `status`, `pemesanan`.`bukti_pembayaran` AS `bukti_pembayaran`, `pemesanan`.`ket_ditolak` AS `ket_ditolak`, `users`.`NIK` AS `nik`, `users`.`nama` AS `nama`, `users`.`alamat` AS `alamat`, (select `users`.`nama` from `users` where `users`.`id` = `pemesanan`.`admin_id`) AS `admin`, `users`.`email` AS `email`, `users`.`no_telp` AS `no_telp`, `posts`.`judul` AS `model` FROM ((`users` join `posts`) join `pemesanan`) WHERE `pemesanan`.`user_id` = `users`.`id` AND `pemesanan`.`id_model` = `posts`.`id` AND `pemesanan`.`status` = 1 ;
 
 -- --------------------------------------------------------
 
@@ -304,7 +356,7 @@ CREATE VIEW `v_pesan_menunggu`  AS SELECT `pemesanan`.`id` AS `id`, `pemesanan`.
 --
 DROP TABLE IF EXISTS `v_pesan_proses`;
 
-CREATE VIEW `v_pesan_proses`  AS SELECT `pemesanan`.`id` AS `id`, `pemesanan`.`user_id` AS `user_id`, `pemesanan`.`admin_id` AS `admin_id`, `pemesanan`.`invoice` AS `invoice`, `pemesanan`.`ukuran` AS `ukuran`, `pemesanan`.`lantai` AS `lantai`, `pemesanan`.`luas_bangunan` AS `luas_bangunan`, `pemesanan`.`id_model` AS `id_model`, `pemesanan`.`kamar` AS `kamar`, `pemesanan`.`kamar_mandi` AS `kamar_mandi`, `pemesanan`.`garasi` AS `garasi`, `pemesanan`.`referensi` AS `referensi`, `pemesanan`.`pesan` AS `pesan`, `pemesanan`.`tanggal` AS `tanggal`, `pemesanan`.`status` AS `status`, `pemesanan`.`bukti_pembayaran` AS `bukti_pembayaran`, `pemesanan`.`ket_ditolak` AS `ket_ditolak`, `users`.`nama` AS `nama`, `users`.`NIK` AS `nik`, `users`.`alamat` AS `alamat`, `users`.`email` AS `email`, `users`.`no_telp` AS `no_telp`, `users`.`nama` AS `admin`, `posts`.`judul` AS `model` FROM ((`users` join `posts`) join `pemesanan`) WHERE ((`pemesanan`.`user_id` = `users`.`id`) AND (`pemesanan`.`admin_id` = `users`.`id`) AND (`pemesanan`.`id_model` = `posts`.`id`) AND (`pemesanan`.`status` <> 1)) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `v_pesan_proses`  AS SELECT `pemesanan`.`id` AS `id`, `pemesanan`.`user_id` AS `user_id`, `pemesanan`.`admin_id` AS `admin_id`, `pemesanan`.`invoice` AS `invoice`, `pemesanan`.`ukuran` AS `ukuran`, `pemesanan`.`lantai` AS `lantai`, `pemesanan`.`luas_bangunan` AS `luas_bangunan`, `pemesanan`.`id_model` AS `id_model`, `pemesanan`.`kamar` AS `kamar`, `pemesanan`.`kamar_mandi` AS `kamar_mandi`, `pemesanan`.`garasi` AS `garasi`, `pemesanan`.`referensi` AS `referensi`, `pemesanan`.`pesan` AS `pesan`, `pemesanan`.`tanggal` AS `tanggal`, `pemesanan`.`status` AS `status`, `pemesanan`.`bukti_pembayaran` AS `bukti_pembayaran`, `pemesanan`.`ket_ditolak` AS `ket_ditolak`, `users`.`nama` AS `nama`, `users`.`NIK` AS `nik`, `users`.`alamat` AS `alamat`, `users`.`email` AS `email`, `users`.`no_telp` AS `no_telp`, `users`.`nama` AS `admin`, `posts`.`judul` AS `model` FROM ((`users` join `posts`) join `pemesanan`) WHERE `pemesanan`.`user_id` = `users`.`id` AND `pemesanan`.`admin_id` = `users`.`id` AND `pemesanan`.`id_model` = `posts`.`id` AND `pemesanan`.`status` <> 1 ;
 
 --
 -- Indexes for dumped tables
@@ -320,6 +372,12 @@ ALTER TABLE `detail_konstruksi`
 -- Indexes for table `kategori`
 --
 ALTER TABLE `kategori`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `keterangan`
+--
+ALTER TABLE `keterangan`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -358,13 +416,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `detail_konstruksi`
 --
 ALTER TABLE `detail_konstruksi`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `kategori`
 --
 ALTER TABLE `kategori`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `keterangan`
+--
+ALTER TABLE `keterangan`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `pemesanan`
