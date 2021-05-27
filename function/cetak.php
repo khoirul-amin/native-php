@@ -33,12 +33,14 @@ $pdf->SetFont('Arial','',10);
 $no = 0;
 $no1 = 0;
 while($gol = mysqli_fetch_array($kategori)){
-    $no++;
     $id_kategori = $gol['id'];
     $rabs =  mysqli_query($koneksi,"SELECT * FROM detail_konstruksi WHERE id_pemesanan='$id' AND id_kategori='$id_kategori'");
     $col = "";
-    $pdf->Cell(15,6,$no,1,0);
-    $pdf->Cell(175,6,$gol['nama_kategori'],1,1);
+    if(mysqli_num_rows($rabs) > 0){
+        $no++;
+        $pdf->Cell(15,6,$no,1,0);
+        $pdf->Cell(175,6,$gol['nama_kategori'],1,1);
+    }
     while($rab = mysqli_fetch_array($rabs)){
         $no1++;
         $pdf->Cell(15,6,'',1,0);
@@ -52,8 +54,10 @@ while($gol = mysqli_fetch_array($kategori)){
 }
 $rab1s =  mysqli_query($koneksi,"SELECT * FROM detail_konstruksi WHERE id_kategori=0 AND id_pemesanan='$id'");
 $collain = "";
-$pdf->Cell(15,6,$no+1,1,0);
-$pdf->Cell(175,6,'PEKERJAAN LAIN-LAIN',1,1);
+if(mysqli_num_rows($rab1s) > 0){
+    $pdf->Cell(15,6,$no+1,1,0);
+    $pdf->Cell(175,6,'PEKERJAAN LAIN-LAIN',1,1);
+}
 while($rab1 = mysqli_fetch_array($rab1s)){
     $no1++;
     $pdf->Cell(15,6,'',1,0);
@@ -72,4 +76,5 @@ while($total = mysqli_fetch_array($totals)){
 }
 $pdf->SetTitle('RAB');
 
+// $pdf->Output('', 'RAB-Bangunan.pdf');
 $pdf->Output('D', 'RAB-Bangunan.pdf');

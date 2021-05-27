@@ -58,17 +58,23 @@
                 $no = 0;
                 while($pesanan = mysqli_fetch_array($result)){ 
                     $no++;
+                    $id = $pesanan['id'];
         
                     $btn_url_desain = "";
                     $rab = "";
+                    if($pesanan['status'] != 3){
+                        $cek_rab = mysqli_query($koneksi,"SELECT * FROM detail_konstruksi WHERE id_pemesanan='$id'");
+                        if(mysqli_num_rows($cek_rab) > 0){
+                            $rab = "<a href='../function/cetak.php?id=<?=$id?>' target='new' class='btn btn-danger btn-sm'>
+                            <i class='fas fa-file'></i> RAB
+                            </a>";
+                        }
+                    }
                     if($pesanan['status'] == 2){
                         $status = "Proses";
                         $id = $pesanan['id'];
                         $url_desain = $pesanan['desain_rumah'];
                         if(!empty($url_desain)){
-                            $rab = "<a href='../function/cetak.php?id=<?=$id?>' target='new' class='btn btn-danger btn-sm'>
-                            <i class='fas fa-file'></i> RAB
-                            </a>";
                             $btn_url_desain = "<a download href='../assets/pdfUpload/$url_desain'
                             class='btn btn-success btn-sm'>
                             <i class='fas fa-eye'></i> Desain

@@ -69,7 +69,9 @@
                     }
                     $nama_kategori = $gol['nama_kategori'];
                     $table = "<table class='table'>$col</table>";
-                    $title[] = "<h4 class='text-center'>$nama_kategori</h4>".$table; 
+                    if($col != ""){
+                      $title[] = "<h4 class='text-center'>$nama_kategori</h4>".$table; 
+                    }; 
                 }
                 $rab1s =  mysqli_query($koneksi,"SELECT * FROM detail_konstruksi WHERE id_kategori=0 AND id_pemesanan='$id'");
                 $collain = "";
@@ -90,7 +92,9 @@
                     </tr>"; 
                 }
                 $tblain = "<table class='table'>$collain</table>";
-                $title[] = "<h4 class='text-center'>PEKERJAAN LAIN-LAIN</h4>".$tblain; 
+                if($collain != ""){
+                  $title[] = "<h4 class='text-center'>PEKERJAAN LAIN-LAIN</h4>".$tblain; 
+                }; 
                 for($i=0; $i<count($title);$i++){
                     echo $title[$i];
                 }; 
@@ -143,15 +147,15 @@
                     </div>
                     <div class="form-group">
                         <label for="inputSatuan">Satuan</label>
-                        <input type="text" name="satuan" class="form-control" id="inputSatuan" placeholder="..." required>
+                        <input type="text" name="satuan" value="-" class="form-control" id="inputSatuan" placeholder="..." required>
                     </div>
                     <div class="form-group">
                         <label for="inputHargaSatuan">Harga Satuan</label>
-                        <input type="number" name="harga" class="form-control" id="inputHargaSatuan" placeholder="..." required>
+                        <input type="number" name="harga" value=0 class="form-control" id="inputHargaSatuan" placeholder="..." required>
                     </div>
                     <div class="form-group">
                         <label for="inputVolume">Volume</label>
-                        <input type="number" step="any" name="volume" class="form-control" id="inputVolume" placeholder="..." required>
+                        <input type="number" step="any" value=0 name="volume" class="form-control" id="inputVolume" placeholder="..." required>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -169,7 +173,7 @@
     var id = document.getElementById("Kategori").value;
     if(id != 0){
       $('#inputKeterangan').remove()
-      $('#ket').append('<select name="keterangan" class="form-control" id="inputKeterangan"></select>');
+      $('#ket').append('<select name="keterangan" onchange="addPendukung()" class="form-control" id="inputKeterangan"></select>');
       $.ajax({
           type: "GET",
           url: `../function/get_keterangan.php?id=${id}`,
@@ -179,19 +183,19 @@
           }
       })
     }else{
-      $('#inputKeterangan').remove()
-      $('#ket').append('<input type="text" name="keterangan" class="form-control" id="inputKeterangan" placeholder="..." required>');
-      $('#inputSatuan').val('');
-      $('#inputHargaSatuan').val('');
-      $('#inputVolume').val('');
+      $('#inputKeterangan').remove();
+      $('#ket').append('<input type="text" name="keterangan" value="-" class="form-control" id="inputKeterangan" placeholder="..." required>');
+      $('#inputSatuan').val('-');
+      $('#inputHargaSatuan').val(0);
+      $('#inputVolume').val(0);
     }
   } 
 
   function setDataKeterangan(datas){
     $('#inputKeterangan').empty();
-    $('#inputSatuan').val('');
-    $('#inputHargaSatuan').val('');
-    $('#inputVolume').val('');
+    $('#inputSatuan').val('-');
+    $('#inputHargaSatuan').val(0);
+    $('#inputVolume').val(0);
     datas.map((data,i) => {
       var ket = document.getElementById("inputKeterangan");
       var option = document.createElement("option");
@@ -209,8 +213,19 @@
     $('#inputHargaSatuan').val(data.harga);
     // $('#inputVolume').val(data.volume);
   }
+  function addPendukung(){
+    var id = $("#inputKeterangan").val()
+    $.ajax({
+          type: "GET",
+          url: `../function/get_ket_by_id.php?id=${id}`,
+          cache: false,
+          success: function(data){
+            addLainLain(data);
+          }
+      })
+  }
   function clearForm(data){
-      $('#id').val('')
+      // $('#id').val('')
       $('#inputKeterangan').empty()
       document.getElementById(data).reset();
   }
