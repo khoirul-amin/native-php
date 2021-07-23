@@ -1,7 +1,10 @@
 <?php
     $style = 'style="background:#001970;"';
     include './library/session.php';
+    include './library/info.php';
     $session = (new Session())->cek_session();
+    $info = (new Info())->cek_info();
+    (new Info())->info_remove();
     if(!$session){
         header('location:./login.php');
     }
@@ -119,3 +122,22 @@
 <?php
     include "./template/footer.php";
 ?>
+<script>
+    $(document).ready(function() {
+        if('<?=$info["status"]?>' != 'kosong'){
+        if('<?=$info['status']?>' == 1){
+            Swal.fire(
+            'Berhasil',
+            '<?=$info["messages"]?>',
+            'success'
+            )
+        }else{
+            Swal.fire(
+            'Gagal',
+            '<?=$info["messages"]?>',
+            'error'
+            )
+        }
+        }
+    })
+</script>

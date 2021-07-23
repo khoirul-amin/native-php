@@ -3,7 +3,10 @@
 <?php
     include '../library/session.php';
     include '../koneksi.php';
+    include '../library/info.php';
     $session = (new Session())->cek_session();
+    $info = (new Info())->cek_info();
+    (new Info())->info_remove();
     if(!$session){
         header('location:../login.php');
     }
@@ -33,32 +36,6 @@
 
   <!-- Page content -->
   <div class="container-fluid mt--6">
-    <?php
-    if(!empty($_GET['pesan'])){
-    if($_GET['pesan'] == 'success'){ ?>
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
-        <strong>Register berhasil !</strong> Silahkan login elalui halaman login.
-        <button type="button" class="close btn" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-    <?php } 
-    else if($_GET['pesan'] == 'password'){ ?>
-    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-        <strong>Register gagal !</strong> Password tidak sama.
-        <button type="button" class="close btn" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-    <?php }
-    else if(!empty($_GET['pesan']) && $_GET['pesan'] != 'success'){ ?>
-    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-        <strong>Register gagal !</strong> Input <?=$_GET['pesan']?> yang anda masukkan sudah terdaftar.
-        <button type="button" class="close btn" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-    <?php } } ?>
     <div class="row">
       <div class="col-xl-12">
           <button type="button" class="btn btn-success mb-2"
@@ -188,6 +165,26 @@
     // $(document).ready( function () {
     //   $('#tables').DataTable();
     // }); 
+
+    
+  $(document).ready(function() {
+    if('<?=$info["status"]?>' != 'kosong'){
+      if('<?=$info['status']?>' == 1){
+        Swal.fire(
+          'Berhasil',
+          '<?=$info["messages"]?>',
+          'success'
+        )
+      }else{
+        Swal.fire(
+          'Gagal',
+          '<?=$info["messages"]?>',
+          'error'
+        )
+      }
+    }
+  })
+
     $('#tables').DataTable();
 
     function hapusData(id){
@@ -201,14 +198,15 @@
         confirmButtonText: 'Yes, delete it!'
       }).then((result) => {
         if (result.value) {
-          $.ajax({
-              type: "GET",
-              url: `../function/hapus_user.php?id=${id}`,
-              cache: false,
-              success: function(data){
-                window.location.reload();
-              }
-          })
+          window.location.href = `../function/hapus_user.php?id=${id}&halaman=pelanggan`;
+          // $.ajax({
+          //     type: "GET",
+          //     url: `../function/hapus_user.php?id=${id}`,
+          //     cache: false,
+          //     success: function(data){
+          //       window.location.reload();
+          //     }
+          // })
         }
       })
     }

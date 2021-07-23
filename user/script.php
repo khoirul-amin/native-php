@@ -15,3 +15,5 @@
   <script src="../assets/vendor/chart.js/dist/Chart.extension.js"></script>
   <!-- Argon JS -->
   <script src="../assets/js/argon.js?v=1.2.0"></script>
+  <!-- Sweet alert -->
+  <!-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> -->

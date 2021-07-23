@@ -3,7 +3,10 @@
 <?php
     include '../library/session.php';
     include '../koneksi.php';
+    include '../library/info.php';
     $session = (new Session())->cek_session();
+    $info = (new Info())->cek_info();
+    (new Info())->info_remove();
     if(!$session){
         header('location:../login.php');
     }
@@ -118,6 +121,25 @@
 <?php include './script.php';?>
 
 <script>
+  
+  $(document).ready(function() {
+    if('<?=$info["status"]?>' != 'kosong'){
+      if('<?=$info['status']?>' == 1){
+        Swal.fire(
+          'Berhasil',
+          '<?=$info["messages"]?>',
+          'success'
+        )
+      }else{
+        Swal.fire(
+          'Gagal',
+          '<?=$info["messages"]?>',
+          'error'
+        )
+      }
+    }
+  })
+
     $('#tables').DataTable();
 
     function hapusData(id){
@@ -131,14 +153,16 @@
         confirmButtonText: 'Yes, delete it!'
       }).then((result) => {
         if (result.value) {
-          $.ajax({
-              type: "GET",
-              url: `../function/hapus_kategori.php?id=${id}`,
-              cache: false,
-              success: function(data){
-                window.location.reload();
-              }
-          })
+          
+          window.location.href = `../function/hapus_kategori.php?id=${id}`;
+          // $.ajax({
+          //     type: "GET",
+          //     url: `../function/hapus_kategori.php?id=${id}`,
+          //     cache: false,
+          //     success: function(data){
+          //       window.location.reload();
+          //     }
+          // })
         }
       })
     }

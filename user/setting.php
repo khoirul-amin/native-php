@@ -1,7 +1,10 @@
   <?php
     include '../library/session.php';
     include '../koneksi.php';
+    include '../library/info.php';
     $session = (new Session())->cek_session();
+    $info = (new Info())->cek_info();
+    (new Info())->info_remove();
     if(!$session){
         header('location:../login.php');
     }
@@ -83,7 +86,7 @@
         <div class="card p-2">
             <h5>Personal information</h5><br>
             <button onclick="save()" class="btn btn-secondary" ><i class="far fa-save"></i> Simpan Data</button> <br/>
-            <button class="btn btn-secondary"><i class="far fa-times-circle"></i> Batalkan</button> <br/>
+            <button onclick='window.location.reload()' class="btn btn-secondary"><i class="far fa-times-circle"></i> Batalkan</button> <br/>
             <button onclick="logout()" class="btn btn-secondary"><i class="fas fa-sign-out-alt"></i> Logout</button><br><br><br>
         </div>
       </div>
@@ -130,6 +133,23 @@
 <?php include './script.php';?>
   <script>
 
+$(document).ready(function() {
+    if('<?=$info["status"]?>' != 'kosong'){
+      if('<?=$info['status']?>' == 1){
+        Swal.fire(
+          'Berhasil',
+          '<?=$info["messages"]?>',
+          'success'
+        )
+      }else{
+        Swal.fire(
+          'Gagal',
+          '<?=$info["messages"]?>',
+          'error'
+        )
+      }
+    }
+  })
     function logout(){
       Swal.fire({
         title: 'Anda yakin?',
@@ -168,7 +188,7 @@
         }).fail(function (jqXHR, textStatus, errorThrown){
             Swal.fire(
                 'Gagal!',
-                errorThrown,
+                'Data gagal dirubah',
                 'error'
             )
         })

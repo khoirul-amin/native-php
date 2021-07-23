@@ -1,5 +1,6 @@
 <?php
 include '../koneksi.php';
+include '../library/info.php';
 $id = $_POST['id'];
 
 $image_name = 'File-'.date("Y-m-d_H_i_s");
@@ -7,7 +8,7 @@ $tipe_image = pathinfo($_FILES["image"]["name"], PATHINFO_EXTENSION);
 $file_name =  $image_name.'.'.$tipe_image;
 $sql = mysqli_query($koneksi,"SELECT * FROM pemesanan WHERE id='$id'");
 while($cek_data = mysqli_fetch_array($sql)){
-    if(!empty($cek_data['image'])){
+    if(!empty($cek_data['bukti_pembayaran'])){
         if(file_exists('../assets/img/imageUpload/'.$cek_data['bukti_pembayaran'])){
             unlink('../assets/img/imageUpload/'.$cek_data['bukti_pembayaran']);
         }
@@ -18,4 +19,10 @@ move_uploaded_file($_FILES["image"]["tmp_name"],$upload_path.$file_name);
 
 $query = "UPDATE pemesanan SET bukti_pembayaran='$file_name' WHERE id='$id'";
 mysqli_query($koneksi,$query);
+
+$res = array(
+    'status' => true,
+    'messages' => "Bukti pembayaran selesai di upload"
+);
+(new Info())->info_set($res);
 header('location:../pesanan.php');

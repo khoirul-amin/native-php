@@ -2,11 +2,13 @@
 
 include '../koneksi.php';
 include '../library/session.php';
+include '../library/info.php';
 $session = (new Session())->cek_session();
 
+$status = false;
 $judul = $_POST['nama'];
 $jenis = $_POST['jenis'];
-$isi = $_POST['isi'];
+$isi = str_replace("'","",$_POST['isi']); 
 $slug = strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $judul)));
 $author = $session->nama;
 $tanggal = date('Y-m-d H:i:s');
@@ -26,13 +28,15 @@ if(!empty($_POST['id'])){
 				}
 			}
         }
-        $upload_path          = '../assets/img/imageUpload/';
+        $upload_path = '../assets/img/imageUpload/';
         move_uploaded_file($_FILES["image"]["tmp_name"],$upload_path.$file_name);
 
         $query = "UPDATE posts SET `judul`='$judul',`image`='$file_name',`isi`='$isi',`tanggal`='$tanggal',`slug`='$slug',`author`='$author',`jenis`='$jenis' WHERE id='$id'";
     }else{
         $query = "UPDATE posts SET `judul`='$judul',`isi`='$isi',`tanggal`='$tanggal',`slug`='$slug',`author`='$author',`jenis`='$jenis' WHERE id='$id'";
     }
+    $status = true;
+    $pesan = "Update data berhasil";
 }else{
     if($_FILES["image"]["name"]){
         $image_name = 'Image-'.date("Y-m-d-H-i-s");
@@ -45,10 +49,22 @@ if(!empty($_POST['id'])){
     }else{
         $query = "INSERT INTO `posts`(`id`, `judul`, `image`, `isi`, `tanggal`, `slug`, `author`, `jenis`) VALUES (null,'$judul',null,'$isi','$tanggal','$slug','$author','$jenis')";
     }
+    $pesan = "Insert data berhasil";
+    $status = true;
 }
 
-mysqli_query($koneksi,$query);
-// if ( false===$result ) {
-// printf("error: %s\n", mysqli_error($koneksi));
-// }
+$result = mysqli_query($koneksi,$query);
+if ( false===$result ) {
+    $res = array(
+        'status' => false,
+        'messages' => 'Data dengan tanda <b>petik</b> tidak bisa dimasukkan'
+    );
+    // printf("error: %s\n", mysqli_error($koneksi));
+}else{
+    $res = array(
+        'status' => $status,
+        'messages' => $pesan
+    );
+}
+$info = (new Info())->info_set($res);
 header('location:../user/posts.php');
